@@ -1,0 +1,50 @@
+﻿<Page x:Class="_423_Butakov.Page3"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+      xmlns:wf="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+      Title="Page3" Height="636" Width="500">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.ColumnSpan="4" Source="/Images/formula3.png" Height="80" Margin="5" ToolTip="y = 9·(x³ + b³)·tan(x)"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="x₀:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtX0" Grid.Row="1" Grid.Column="1" Margin="5" Padding="5" ToolTip="Начало отрезка"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="xₖ:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtXk" Grid.Row="1" Grid.Column="3" Margin="5" Padding="5" ToolTip="Конец отрезка"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="dx:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtDx" Grid.Row="2" Grid.Column="1" Margin="5" Padding="5" ToolTip="Шаг"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="b:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtB" Grid.Row="2" Grid.Column="3" Margin="5" Padding="5" ToolTip="Параметр b"/>
+
+        <TextBox x:Name="txtResult3" Grid.Row="3" Grid.ColumnSpan="4" Margin="5" Height="120" 
+                 IsReadOnly="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas"
+                 ToolTip="Таблица значений x и y"/>
+
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <Button Content="Вычислить" Click="Calculate3_Click" Margin="5" Padding="10,5" ToolTip="Построить таблицу и график"/>
+            <Button Content="Очистить" Click="Clear3_Click" Margin="5" Padding="10,5" ToolTip="Очистить всё"/>
+        </StackPanel>
+
+        <wf:WindowsFormsHost Grid.Row="5" Grid.ColumnSpan="4" Height="250" Margin="5">
+            <charts:Chart x:Name="ChartFunc" />
+        </wf:WindowsFormsHost>
+    </Grid>
+</Page>

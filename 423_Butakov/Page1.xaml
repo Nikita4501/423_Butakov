@@ -1,0 +1,38 @@
+﻿<Page x:Class="_423_Butakov.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Page1">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.ColumnSpan="2" Source="/Images/formula1.png" Height="80" Margin="5" ToolTip="Формула: c = 5*x*y - y*(arctg(z)-π)/(2+|x|+y²)"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="x:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtX1" Grid.Row="1" Grid.Column="1" Margin="5" Padding="5" ToolTip="Введите значение x"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="y:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtY1" Grid.Row="2" Grid.Column="1" Margin="5" Padding="5" ToolTip="Введите значение y"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="z:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtZ1" Grid.Row="3" Grid.Column="1" Margin="5" Padding="5" ToolTip="Введите значение z"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Ответ:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtResult1" Grid.Row="4" Grid.Column="1" Margin="5" Padding="5" IsReadOnly="True" Background="LightGray" ToolTip="Результат вычисления"/>
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Вычислить" Click="Calculate1_Click" Margin="5" Padding="10,5" ToolTip="Вычислить значение c"/>
+            <Button Content="Очистить" Click="Clear1_Click" Margin="5" Padding="10,5" ToolTip="Очистить поля"/>
+        </StackPanel>
+    </Grid>
+</Page>

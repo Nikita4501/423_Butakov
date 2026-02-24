@@ -1,0 +1,43 @@
+﻿<Page x:Class="_423_Butakov.Page2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Page2">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.ColumnSpan="2" Source="/Images/formula2.png" Height="100" Margin="5" ToolTip="Система условий для b"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="x:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtX2" Grid.Row="1" Grid.Column="1" Margin="5" Padding="5" ToolTip="Введите x"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="y:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtY2" Grid.Row="2" Grid.Column="1" Margin="5" Padding="5" ToolTip="Введите y"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Выберите f(x):" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="5">
+            <RadioButton x:Name="rbSh" GroupName="Func" Content="sh(x)" IsChecked="True" Margin="5" ToolTip="Гиперболический синус"/>
+            <RadioButton x:Name="rbX2" GroupName="Func" Content="x²" Margin="5" ToolTip="x в квадрате"/>
+            <RadioButton x:Name="rbExp" GroupName="Func" Content="eˣ" Margin="5" ToolTip="Экспонента"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Результат b:" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+        <TextBox x:Name="txtResult2" Grid.Row="4" Grid.Column="1" Margin="5" Padding="5" IsReadOnly="True" Background="LightGray" ToolTip="Результат вычисления"/>
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Вычислить" Click="Calculate2_Click" Margin="5" Padding="10,5" ToolTip="Вычислить значение b"/>
+            <Button Content="Очистить" Click="Clear2_Click" Margin="5" Padding="10,5" ToolTip="Очистить поля"/>
+        </StackPanel>
+    </Grid>
+</Page>
