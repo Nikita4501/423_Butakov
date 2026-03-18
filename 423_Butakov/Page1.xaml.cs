@@ -11,6 +11,38 @@ namespace _423_Butakov
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Вычисляет значение c по формуле:
+        /// c = 5*x*y - (y * (atan(z) - π)) / (2 + |x| + y²)
+        /// </summary>
+        /// <param name="x">Параметр x</param>
+        /// <param name="y">Параметр y</param>
+        /// <param name="z">Параметр z</param>
+        /// <param name="result">Результат вычисления (корректен при возврате true)</param>
+        /// <returns>true, если вычисление успешно; false при делении на ноль или других ошибках</returns>
+        public bool TryComputeC(double x, double y, double z, out double result)
+        {
+            result = 0;
+            try
+            {
+                double denominator = 2 + Math.Abs(x) + y * y;
+                if (Math.Abs(denominator) < 1e-15)
+                    return false; // деление на ноль
+
+                double numerator = y * (Math.Atan(z) - Math.PI);
+                result = 5 * x * y - numerator / denominator;
+
+                if (double.IsNaN(result) || double.IsInfinity(result))
+                    return false;
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private void Calculate1_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -19,17 +51,10 @@ namespace _423_Butakov
                 double y = double.Parse(txtY1.Text);
                 double z = double.Parse(txtZ1.Text);
 
-                double numerator = y * (Math.Atan(z) - Math.PI);
-                double denominator = 2 + Math.Abs(x) + y * y;
-
-                if (denominator == 0)
-                {
-                    MessageBox.Show("Знаменатель не может быть равен нулю.", "Ошибка");
-                    return;
-                }
-
-                double c = 5 * x * y - numerator / denominator;
-                txtResult1.Text = c.ToString("F4");
+                if (TryComputeC(x, y, z, out double c))
+                    txtResult1.Text = c.ToString("F4");
+                else
+                    MessageBox.Show("Ошибка вычисления (возможно деление на ноль).", "Ошибка");
             }
             catch (FormatException)
             {

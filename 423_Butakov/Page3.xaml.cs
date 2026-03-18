@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -24,6 +23,34 @@ namespace _423_Butakov
                 Color = System.Drawing.Color.Blue,
                 IsValueShownAsLabel = false
             });
+        }
+
+        /// <summary>
+        /// Вычисляет значение y = 9 * (x³ + b³) * tan(x)
+        /// </summary>
+        /// <param name="x">Аргумент x</param>
+        /// <param name="b">Параметр b</param>
+        /// <param name="result">Результат</param>
+        /// <returns>true, если вычисление успешно; false при недопустимых значениях (tan разрывен)</returns>
+        public bool TryComputeY(double x, double b, out double result)
+        {
+            result = 0;
+            try
+            {
+                double tanX = Math.Tan(x);
+                // Проверка на точки разрыва тангенса (pi/2 + pi*k)
+                double cosX = Math.Cos(x);
+                if (Math.Abs(cosX) < 1e-10)
+                    return false;
+
+                result = 9 * (Math.Pow(x, 3) + Math.Pow(b, 3)) * tanX;
+
+                return !double.IsNaN(result) && !double.IsInfinity(result);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void Calculate3_Click(object sender, RoutedEventArgs e)
@@ -52,22 +79,15 @@ namespace _423_Butakov
 
                 for (double x = x0; x <= xk; x += dx)
                 {
-                    double tanX;
-                    try
+                    if (TryComputeY(x, b, out double y))
                     {
-                        tanX = Math.Tan(x);
-                    }
-                    catch
-                    {
-                        tanX = double.NaN;
-                    }
-
-                    double y = 9 * (Math.Pow(x, 3) + Math.Pow(b, 3)) * tanX;
-
-                    txtResult3.AppendText($"x = {x:F4}\t y = {y:F4}{Environment.NewLine}");
-
-                    if (!double.IsNaN(y) && !double.IsInfinity(y))
+                        txtResult3.AppendText($"x = {x:F4}\t y = {y:F4}{Environment.NewLine}");
                         ChartFunc.Series[0].Points.AddXY(x, y);
+                    }
+                    else
+                    {
+                        txtResult3.AppendText($"x = {x:F4}\t y = undefined{Environment.NewLine}");
+                    }
                 }
             }
             catch (FormatException)
